@@ -7,6 +7,7 @@
     <tr>
       <th>Title</th>
       <th>Content</th>
+      <th>User</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +17,13 @@
       <tr>
         <td><%= item.title %></td>
         <td><%= item.content %></td>
+        <td><%= item.user.email %></td>
         <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, 
-                                         data: { confirm: 'Are you sure?' } %></td>
+        <% if item.user == current_user %>
+          <td><%= link_to 'Edit', edit_item_path(item) %></td>
+          <td><%= link_to 'Destroy', item, method: :delete, 
+                                           data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
