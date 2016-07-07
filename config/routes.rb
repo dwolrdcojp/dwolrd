@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  root 'application#hello'
+  resources :items
+  get 'home/index'
+
+  root 'home#index'
 end
