@@ -10,5 +10,12 @@
   <%= @item.content %>
 </p>
 
+<h2>Comments</h2>
+<%= render @item.comments %>
+
+
+<h2>Add a comment:</h2>
+<%= render "comments/form" %>
+
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
