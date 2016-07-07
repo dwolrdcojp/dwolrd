@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  
+  root 'home#index'
+
   resources   :items do
     resources :comments
   end
 
-  get  'home/index'
-  root 'home#index'
 end
