@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield(:title) %> | D-WOLRD: POWER SHOP</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>
+    <%= yield(:title) %> | D-WOLRD: POWER SHOP</title>
+    <%= render 'layouts/rails_default' %>
+    <%= render 'layouts/shim' %>
   </head>
-  <body style="background: #EEEEEE;">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <%= link_to "Sign Up", new_user_registration_path %>
-  <%= link_to "Sign In", new_user_session_path %>
+  <body>
+  <%= render 'layouts/alert'  %>
+  <%= render 'layouts/header' %>  
+  <div class="container">
     <%= yield %>
+  </div>
   </body>
 </html>

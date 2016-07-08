@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  root 'items#index'
   
-  root 'static_pages#home'
-  get  'static_pages/help'
-  get  'static_pages/about'
-  get  'static_pages/contact'
+  get '/about',   to: 'static_pages#about'
+
+  devise_for :users
 
   resources   :items do
     resources :comments
