@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>D-WOLRD</title>
+    <title><%= yield(:title) %> | D-WOLRD: POWER SHOP</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,7 +11,7 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   <%= link_to "Sign Up", new_user_registration_path %>
-   <%= link_to "Sign In", new_user_session_path %>
+  <%= link_to "Sign In", new_user_session_path %>
     <%= yield %>
   </body>
 </html>
