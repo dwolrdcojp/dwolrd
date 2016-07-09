@@ -12,7 +12,7 @@
 
 <p>
   <strong>User</strong>
-  <%= @item.user.email %>
+  <%= @item.user.email%>
 </p>
 
 <p>
@@ -23,14 +23,14 @@
 <span class="timestamp">
   Posted <%= time_ago_in_words(@item.created_at) %> ago.
 <% if @item.user == current_user %>
-  <td><%= link_to 'Edit', edit_item_path(@item) %></td>
-  <td><%= link_to 'Destroy', @item, method: :delete, 
-                                   data: { confirm: 'Are you sure?' } %></td>
+  <%= link_to 'Edit', edit_item_path(@item) %>
+  <%= link_to 'Destroy', @item, method: :delete, 
+                                   data: { confirm: 'Are you sure?' } %>
 <% end %>
 </span>
 
 <h2>Comments</h2>
-<%= render @item.comments %>
+<%= render 'comments/comment' %>
 
 
 <h2>Add a comment:</h2>

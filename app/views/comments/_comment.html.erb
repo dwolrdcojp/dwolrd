@@ -1,17 +1,10 @@
 <% @item.comments.each do |comment| %>
   <p>
-    <b>Commenter:</b>
-    <%= comment.commenter %>
+    <strong>User:</strong>
+    <%= comment.user.email %>
   </p>
- 
   <p>
     <b>Comment:</b>
     <%= comment.body %>
-  </p>
-
-  <p>
-  <%= link_to 'Destroy Comment', [comment.item, comment],
-               :confirm => 'Are you sure?',
-               :method => :delete %>
   </p>
 <% end %>
