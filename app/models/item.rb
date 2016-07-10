@@ -1,10 +1,10 @@
 class Item < ApplicationRecord
   belongs_to :user
   default_scope -> { order(created_at: :desc) }
-  mount_uploader :picture, PictureUploader
+  mount_uploaders :images, PictureUploader
   validates :user_id, :presence  => true
   validates :content, :presence  => true
-  validate  :picture_size
+  validate  :images_size
   validates :title,   :presence  => true,
                       :length    => { :minimum => 5 }
   has_many :comments, :dependent => :destroy
@@ -13,9 +13,9 @@ class Item < ApplicationRecord
   private
 
     # Validates the size of an uploaded picture
-    def picture_size
-      if picture.size > 5.megabytes
-        errors.add(:picture, "should be less than 5MB")
+    def images_size
+      if images.size > 5.megabytes
+        errors.add(:images, "should be less than 5MB")
       end
     end
 end

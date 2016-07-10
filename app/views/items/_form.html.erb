@@ -24,8 +24,8 @@
   <div class="actions">
     <%= f.submit "Post", class: "btn btn-primary" %>
   </div>
-  <span class="picture">
-    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+  <span class="images">
+    <%= f.file_field :images, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
   </span>
 <% end %>
 
