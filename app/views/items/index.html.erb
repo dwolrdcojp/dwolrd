@@ -1,12 +1,15 @@
-<p id="notice"><%= notice %></p>
-
+<script>
+$(function() {
+  swal("Awesome!");
+});
+</script>
 <h1>Items</h1>
       <% @items.each do |item| %>
         <div class="col-md-3">
             <%= image_tag item.picture.url if item.picture? %><br>
             <%= item.title %><br>
             <%= item.content %><br>
-            <%= item.user.email %><br>
+            <%= item.user.username %><br>
             Posted <%= time_ago_in_words(item.created_at) %> ago.<br>
             <%= link_to 'Show', item %><br>
             <% if item.user == current_user %>
@@ -17,5 +20,3 @@
         </div> 
       <% end %>
 <br>
-
-<%= link_to 'New Item', new_item_path %>

@@ -1,10 +1,14 @@
 <% @item.comments.each do |comment| %>
   <p>
     <strong>User:</strong>
-    <%= comment.user.email %>
+    <%= comment.user.username %>
   </p>
   <p>
     <b>Comment:</b>
     <%= comment.body %>
   </p>
+  <p>
+  <%= time_ago_in_words(@item.created_at) %> ago
+  </p>
+  </br>
 <% end %>

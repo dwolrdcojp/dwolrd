@@ -1,39 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @item.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @item.content %>
-</p>
-
-<p>
-  <strong>User</strong>
-  <%= @item.user.email%>
-</p>
-
-<p>
+<div class="col-md-4">
   <strong>Image</strong>
   <%= image_tag @item.picture.url if @item.picture? %>
-</p>
+</div>
 
-<span class="timestamp">
-  Posted <%= time_ago_in_words(@item.created_at) %> ago.
-<% if @item.user == current_user %>
-  <%= link_to 'Edit', edit_item_path(@item) %>
-  <%= link_to 'Destroy', @item, method: :delete, 
-                                   data: { confirm: 'Are you sure?' } %>
-<% end %>
-</span>
+<div class="cold-md-4 col-md-offset-7">
+  <strong>Title:</strong>
+  <%= @item.title %><br>
 
-<h2>Comments</h2>
-<%= render 'comments/comment' %>
+  <strong>Content:</strong>
+  <%= @item.content %><br>
 
+  <strong>User</strong>
+  <%= @item.user.username%><br>
 
-<h2>Add a comment:</h2>
-<%= render "comments/form" %>
+  <%= time_ago_in_words(@item.created_at) %> ago<br>
 
-<%= link_to 'Back', items_path %>
+    <% if @item.user == current_user %>
+      <%= link_to 'Edit', edit_item_path(@item) %><br>
+      <%= link_to 'Destroy', @item, method: :delete, 
+                                       data: { confirm: 'Are you sure?' } %>
+    <% end %>
+
+  <h2>Comments</h2>
+  <%= render 'comments/comment' %>
+
+  <h2>Add a comment:</h2>
+  <%= render 'comments/form' %>
+
+  <%= link_to 'Back', items_path %>
+</div>
