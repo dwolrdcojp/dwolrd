@@ -2,6 +2,16 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
+  def garage
+    @items = current_user.items
+  end
+
+    def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
+    redirect_to root_url and return unless @user.activated?
+  end
+
   # GET /items
   # GET /items.json
   def index
