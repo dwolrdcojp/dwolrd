@@ -19,6 +19,7 @@ gem 'jquery-rails'
 gem 'turbolinks',              '5.0.0.beta2'
 gem 'jbuilder',                '2.4.1'
 gem 'haml'
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
 
 group :development, :test do
   gem 'byebug',  '9.0.0', platform: :mri
