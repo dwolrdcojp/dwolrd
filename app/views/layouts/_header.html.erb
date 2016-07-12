@@ -5,16 +5,25 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "About",  about_path   %></li>
         <li><%= link_to "Sell",   new_item_path %></li>
-        <li><%= link_to "Garage", garage_path %></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Garage <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "My Parts", garage_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Bought", purchases_path %></li>
+              <li><%= link_to "Sold", sales_path %></li>
+            </ul>
+          </li>
+
         <% if user_signed_in? %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Account <b class="caret"></b>
+              <%= current_user.username %> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Messages", '#' %></li>
-              <li><%= link_to "My Items", '#' %></li>
-              <li><%= link_to "History",  '#' %></li>
+              <li><%= link_to "Messages", conversations_path %></li>
               <li><%= link_to "Settings", edit_user_registration_path %></li>
               <li class="divider"></li>
               <li>

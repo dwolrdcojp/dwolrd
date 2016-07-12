@@ -1,0 +1,13 @@
+<div class="center">
+<h1>Bought</h1>
+</div>
+  <% @orders.each do |order| %>
+    <div class="col-md-3">
+        <%= image_tag order.item.images[0].url, size: 200 %><br>
+        <%= order.item.title %><br>
+        <%= order.item.content %><br>
+        <%= order.seller.username %><br>
+        <%= time_ago_in_words(order.item.created_at) %> ago.<br>
+        <%= link_to 'Show', order.item %><br>
+    </div> 
+  <% end %>
