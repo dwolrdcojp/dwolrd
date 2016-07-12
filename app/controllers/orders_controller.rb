@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @item = Item.find(params[:item_id])
+    gon.client_token = generate_client_token
   end
 
   # POST /orders
@@ -27,11 +28,17 @@ class OrdersController < ApplicationController
     @order.buyer_id = current_user.id
     @order.seller_id = @seller.id
 
+    @result = Braintree::Transaction.sale(
+              :amount => "10.00",
+              payment_method_nonce: params[:payment_method_nonce])
+
     respond_to do |format|
       if @order.save
         format.html { redirect_to root_url, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
+        flash[:alert] = "Something went wrong :("
+        gon.client_token = generate_client_token
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
@@ -47,5 +54,9 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(:address, :city, :state)
+    end
+
+    def generate_client_token
+      Braintree::ClientToken.generate
     end
 end
