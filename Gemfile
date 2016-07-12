@@ -18,8 +18,9 @@ gem 'coffee-rails',            '4.1.1'
 gem 'jquery-rails'            
 gem 'turbolinks',              '5.0.0.beta2'
 gem 'jbuilder',                '2.4.1'
+gem 'braintree',               '~> 2.63.0'
 gem 'haml'
-gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass', branch: 'v1.0beta'
+gem 'figaro'
 
 group :development, :test do
   gem 'byebug',  '9.0.0', platform: :mri

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'transactions/new'
+
   root 'items#index'
   
   get '/about',   to: 'static_pages#about'
@@ -17,5 +19,7 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+
+  resources :transactions, only: [:new, :create]
   
 end
