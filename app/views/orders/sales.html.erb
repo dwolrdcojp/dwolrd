@@ -3,7 +3,7 @@
 </div>
   <% @orders.each do |order| %>
     <div class="col-md-3">
-        <%= image_tag order.item.images[0].url, size: 200 %><br>
+        <%= filepicker_image_tag order.item.filepicker_url.split(",").last, w: 200, h: 200, fit: 'crop' %><br>
         <%= order.item.title %><br>
         <%= order.item.content %><br>
         <%= order.buyer.username %><br>

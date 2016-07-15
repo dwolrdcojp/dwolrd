@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @item = Item.find(params[:item_id])
-    gon.client_token = generate_client_token
   end
 
   # POST /orders
@@ -27,10 +26,6 @@ class OrdersController < ApplicationController
     @order.item_id = @item.id
     @order.buyer_id = current_user.id
     @order.seller_id = @seller.id
-
-    @result = Braintree::Transaction.sale(
-              :amount => "10.00",
-              payment_method_nonce: params[:payment_method_nonce])
 
     respond_to do |format|
       if @order.save
@@ -56,7 +51,4 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:address, :city, :state)
     end
 
-    def generate_client_token
-      Braintree::ClientToken.generate
-    end
 end

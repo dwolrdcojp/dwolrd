@@ -1,8 +1,7 @@
 <div class="col-md-4">
-  <strong>Image</strong><br>
-  <% @item.images.each do |item| %>
-    <%= image_tag item.url %>
-    <% end %>
+<% @item.filepicker_url.split(",").reverse.each do |image| %>
+<%= filepicker_image_tag image, w: 500 %>
+<% end %>
 </div>
 
 <div class="cold-md-4 col-md-offset-7">
@@ -18,7 +17,7 @@
   <%= time_ago_in_words(@item.created_at) %> ago<br>
   <br>
   <div class="center">
-  <%= link_to "Buy it now", new_item_order_path(@item), class: "btn btn-primary" %>
+  <%= link_to "Buy", new_item_order_path(@item), class: "btn btn-primary" %>
   </div>
     <% if @item.user == current_user %>
       <%= link_to 'Edit', edit_item_path(@item) %><br>

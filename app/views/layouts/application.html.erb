@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-    <%= yield(:title) %> | D-WOLRD: POWER SHOP</title>
+    <title>D-WOLRD: POWER SHOP</title>
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
   </head>
   <body>
+  <%= filepicker_js_include_tag %>
   <%= render 'layouts/header' %>  
   <%= render 'layouts/alert'  %>
   <div class="container">
