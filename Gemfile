@@ -19,7 +19,6 @@ gem 'sass-rails'
 gem 'jquery-rails'  
 gem 'haml'
 gem 'figaro'
-gem 'jquery-turbolinks'
 
 
 group :development, :test do
