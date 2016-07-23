@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/garage',  to: 'items#garage'
   get 'sales'     => "orders#sales"
   get 'purchases' => "orders#purchases"
+  get 'favorites' => "items#favorites"
 
   devise_for :users
 

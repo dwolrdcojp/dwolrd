@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  rescue_from ActiveRecord::RecordInvalid, with: :deny_access
       
 
   def garage
@@ -87,6 +88,14 @@ class ItemsController < ApplicationController
     else
       redirect_to :back, notice: 'Nothing happened.'
     end
+  end
+
+  def favorites
+    @items = current_user.favorites
+  end
+
+  def deny_access
+    redirect_to :back, notice: 'Nothing happened.'
   end
 
   private

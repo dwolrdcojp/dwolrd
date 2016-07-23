@@ -19,6 +19,7 @@ gem 'sass-rails'
 gem 'jquery-rails'  
 gem 'haml'
 gem 'figaro'
+gem 'bootstrap_form'
 
 
 group :development, :test do
