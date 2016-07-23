@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources   :items do
     resources :orders, only: [:new, :create]
     resources :comments
+    put :favorite, on: :member
   end
 
   resources :conversations do

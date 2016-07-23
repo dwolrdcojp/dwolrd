@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+      
 
   def garage
     @items = current_user.items
@@ -69,6 +70,22 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def favorite
+    @item = Item.find(params[:id])
+    type = params[:type]
+    if type == "favorite"
+      current_user.favorites << @item
+      redirect_to :back, notice: "You favorited #{@item.title}"
+
+    elsif type == "unfavorite"
+      current_user.favorites.delete(@item)
+      redirect_to :back, notice: "Unfavorited #{@item.title}"
+
+    else
+      redirect_to :back, notice: 'Nothing happened.'
     end
   end
 

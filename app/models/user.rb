@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :comments
   has_many :sales, class_name: "Order", foreign_key: "seller_id"
   has_many :purchases, class_name: "Order", foreign_key: "buyer_id"
+  has_many :favorite_items
+  has_many :favorites, through: :favorite_items, source: :item
   validates :email,    :uniqueness => true
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
   # Only allow letter, number, underscore and punctuation.

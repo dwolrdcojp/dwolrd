@@ -11,8 +11,17 @@
   <strong>Content:</strong>
   <%= @item.content %><br>
 
-  <strong>User</strong>
+  <strong>User:</strong>
   <%= @item.user.username%><br>
+
+  <% if current_user %>
+    <%= link_to "favorite",   favorite_item_path(@item, 
+                                                        type: "favorite"), 
+                                                        method: :put %><br>
+    <%= link_to "unfavorite", favorite_item_path(@item, 
+                                                        type: "unfavorite"), 
+                                                        method: :put %><br>
+  <% end %><br>
 
   <%= time_ago_in_words(@item.created_at) %> ago<br>
   <br>

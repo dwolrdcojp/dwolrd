@@ -1,6 +1,5 @@
 <%= form_for([@item, @item.comments.build]) do |f| %>
   <div class="field">
-    <%= f.label :body %><br />
     <%= f.text_area :body, placeholder: "add a comment" %>
   </div>
   <div class="actions">

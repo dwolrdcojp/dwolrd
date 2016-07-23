@@ -7,5 +7,6 @@ class Item < ApplicationRecord
                       :length    => { :minimum => 5 }
   has_many :comments, :dependent => :destroy
   has_many :orders
-  
+  has_many :favorite_items
+  has_many :favorited_by, through: :favorite_items, source: :user
 end
