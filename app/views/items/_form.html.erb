@@ -1,4 +1,4 @@
-<%= form_for(item, html: { multipart: true }) do |f| %>
+<%= bootstrap_form_for(item, html: { multipart: true }) do |f| %>
   <% if item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -11,20 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
     <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :content %>
     <%= f.text_area :content, placeholder: "Post some DOPE..." %>
-  </div>
-
     <%= f.label :filepicker_url, "Upload Images" %>
-    <%= f.filepicker_field :filepicker_url, multiple: true, mimetypes: 'image/jpeg,image/gif,image/png', max_size: 5120 * 1024  %>
-
-  <div class="actions">
-    <%= f.submit "Post", class: "btn btn-primary" %>
-  </div>
+    <%= f.filepicker_field :filepicker_url, multiple: true, mimetypes: 'image/jpeg,image/gif,image/png', max_size: 5120 * 1024  %><br>
+    <div class="center">
+      <%= f.submit "Post", class: "btn btn-primary" %>
+    </div>
   <% end %>

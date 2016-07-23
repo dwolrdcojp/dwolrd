@@ -13,7 +13,7 @@
 
   <strong>User:</strong>
   <%= @item.user.username%><br>
-
+  <%= pluralize(@item.favorited_by.count, 'user') %> favorited this<br>
   <% if current_user %>
     <%= link_to "favorite",   favorite_item_path(@item, 
                                                         type: "favorite"), 

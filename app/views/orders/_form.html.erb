@@ -1,4 +1,4 @@
-<%= form_for([@item, @order]) do |f| %>
+<%= bootstrap_form_for([@item, @order]) do |f| %>
   <% if order.errors.any? %>
     <div id="error_explanation" class="alert alert-danger alert-dismissable">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -12,23 +12,14 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :address %>
     <%= f.text_field :address, class: "form-control" %>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :city %>
     <%= f.text_field :city, class: "form-control" %>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :state %>
     <%= f.text_field :state, class: "form-control" %>
-  </div>
 
-  <div class="form-group">
-    <div id="dropin"></div>
+
+  <div class="form-group center">
     <%= f.submit "Complete Order", class: "btn btn-success" %>
   </div>
 <% end %>
