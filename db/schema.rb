@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722230431) do
+ActiveRecord::Schema.define(version: 20160723042311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160722230431) do
     t.string   "picture"
     t.json     "images"
     t.string   "filepicker_url"
+    t.string   "username"
   end
 
   create_table "messages", force: :cascade do |t|
