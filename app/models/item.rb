@@ -9,4 +9,9 @@ class Item < ApplicationRecord
   has_many :orders
   has_many :favorite_items
   has_many :favorited_by, through: :favorite_items, source: :user
+
+  def self.search(search)
+  where("title ILIKE ? OR content ILIKE ? OR user ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%") 
+  end
+
 end

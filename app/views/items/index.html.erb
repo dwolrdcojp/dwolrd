@@ -1,3 +1,21 @@
+<div class="row">
+  <%= form_tag(items_path, :method => "get") do %>
+    <div class="col-lg-6 col-lg-offset-3">
+      <div class="input-group">
+        <%= text_field_tag :search, params[:search], placeholder: "Search items...", class: "form-control" %>
+        <div class="input-group-btn">
+            <%= submit_tag "Search", :name => nil, class: "btn btn-default btn-block" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br>
+
+<% if @items.blank? %>
+  <h4>There are no items containing the term <%= params[:search] %>.</h4>
+<% end %>
+
 <h1>Items</h1>
       <% @items.each do |item| %>
         <div class="col-md-3">
