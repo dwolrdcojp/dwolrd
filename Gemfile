@@ -20,7 +20,7 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'figaro'
 gem 'bootstrap_form'
-
+gem 'paypal-sdk-adaptivepayments'
 
 group :development, :test do
   gem 'byebug',  '9.0.0', platform: :mri
