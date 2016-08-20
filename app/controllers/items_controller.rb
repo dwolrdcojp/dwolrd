@@ -112,6 +112,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :content, :filepicker_url)
+      params.require(:item).permit(:title, :content, :filepicker_url, :price)
     end
 end

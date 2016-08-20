@@ -4,30 +4,44 @@ class OrdersController < ApplicationController
 
   require 'paypal-sdk-adaptivepayments'
 
-  @api = PayPal::SDK::AdaptivePayments.new
+  def pay
+    p = Print.find_by(id: params[:id])
+    user = current_user
+    price = @order.item.price
+    commission = 0.06
 
-  # Build request object
-  @pay = @api.build_pay({
-    :actionType => "PAY",
-    :cancelUrl => "http://localhost:3000/samples/adaptive_payments/pay",
-    :currencyCode => "USD",
-    :feesPayer => "SENDER",
-    :ipnNotificationUrl => "http://localhost:3000/samples/adaptive_payments/ipn_notify",
-    :receiverList => {
-      :receiver => [{
-        :amount => 1.0,
-        :email => current_user.email }] },
-    :returnUrl => "http://localhost:3000/samples/adaptive_payments/pay" })
+    # Build API call
+    @api = PayPal::SDK::AdaptivePayments.new
+    @pay = @api.build_pay({
+      :actionType => "PAY",
+      :cancelUrl => "http://localhost:3000/p/#{p.id}",
+      :returnUrl => "http://localhost:3000/#{p.path}",
+      :currencyCode => "USD",
+      :feesPayer => "PRIMARYRECEIVER",
+      :ipnNotificationUrl => "http://localhost:3000/paypal/ipn_notify",
+      :receiverList => {
+        :receiver => [{
+          :amount => price,
+          :email => current_user.email,
+          :primary => true },
+        {
+          :amount => price * (1 - commission),
+          :email => User.find(@order.item.user_id).email,
+          :primary => false }]
+        },
+        :memo => "Transaction for #{p.username}"
+      } || default_api_value)
 
-  # Make API call & get response
-  @response = @api.pay(@pay)
+    # Make API call & get response
+    @response = @api.pay(@pay)
 
-  # Access response
-  if @response.success? && @response.payment_exec_status != "ERROR"
-    @response.payKey
-    @api.payment_url(@response)  # Url to complete payment
-  else
-    @response.error[0].message
+    # Access response
+    if @response.success? && @response.payment_exec_status != "ERROR"
+      @response.payKey
+      @api.payment_url(@response)  # Url to complete payment
+    else
+      @response.error[0].message
+    end
   end
 
   def sales

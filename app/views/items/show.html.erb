@@ -1,7 +1,7 @@
 <div class="col-md-4">
-<% @item.filepicker_url.split(",").reverse.each do |image| %>
-<%= filepicker_image_tag image, w: 500 %>
-<% end %>
+  <% @item.filepicker_url.split(",").reverse.each do |image| %>
+    <%= filepicker_image_tag image, w: 500 %>
+  <% end %>
 </div>
 
 <div class="cold-md-4 col-md-offset-7">
@@ -11,34 +11,41 @@
   <strong>Content:</strong>
   <%= @item.content %><br>
 
+  <strong>Price:</strong>
+  <%= @item.price %><br>  
+
   <strong>User:</strong>
   <%= @item.user.username%><br>
+
   <%= pluralize(@item.favorited_by.count, 'user') %> favorited this<br>
-  <% if current_user %>
-    <%= link_to "favorite",   favorite_item_path(@item, 
-                                                        type: "favorite"), 
-                                                        method: :put %><br>
-    <%= link_to "unfavorite", favorite_item_path(@item, 
-                                                        type: "unfavorite"), 
-                                                        method: :put %><br>
-  <% end %><br>
+    <% if current_user %>
+      <%= link_to "favorite",   favorite_item_path(@item, 
+                                                          type: "favorite"), 
+                                                          method: :put %><br>
+      <%= link_to "unfavorite", favorite_item_path(@item, 
+                                                          type: "unfavorite"), 
+                                                          method: :put %><br>
+    <% end %><br>
 
-  <%= time_ago_in_words(@item.created_at) %> ago<br>
-  <br>
-  <div class="center">
-  <%= link_to "Buy", new_item_order_path(@item), class: "btn btn-primary" %>
-  </div>
-    <% if @item.user == current_user %>
-      <%= link_to 'Edit', edit_item_path(@item) %><br>
-      <%= link_to 'Destroy', @item, method: :delete, 
-                                       data: { confirm: 'Are you sure?' } %>
-    <% end %>
+  <%= time_ago_in_words(@item.created_at) %> ago<br><br>
+</div>
 
-  <h2>Comments</h2>
-  <%= render 'comments/comment' %>
+<div class="center">
+<%= link_to "Buy", new_item_order_path(@item), class: "btn btn-primary" %>
+</div>
 
-  <h2>Add a comment:</h2>
-  <%= render 'comments/form' %>
+<div class="cold-md-4 col-md-offset-7">
+  <% if @item.user == current_user %>
+    <%= link_to 'Edit', edit_item_path(@item) %><br>
+    <%= link_to 'Destroy', @item, method: :delete, 
+                                     data: { confirm: 'Are you sure?' } %>
+  <% end %>
 
-  <%= link_to 'Back', items_path %>
+<h2>Comments</h2>
+<%= render 'comments/comment' %>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
+
+<%= link_to 'Back', items_path %>
 </div>
