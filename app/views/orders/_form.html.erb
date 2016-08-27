@@ -19,6 +19,11 @@
         </ul>
       </div>
     <% end %>
+
+    <div id="stripe-error" class="alert alert-danger" style="display:none">
+      <noscript> Javascript is not enabled and is required for this form. First enable it in your web browser settings</noscript>
+    </div>
+    
   <div class="form-group">
     <%= f.text_field :address, class: "form-control" %>
   </div>

@@ -30,7 +30,7 @@
   <%= time_ago_in_words(@item.created_at) %> ago<br><br>
 </div>
 
-<div class="center">
+<div data-turbolinks="false" class="center">
 <%= link_to "Buy", new_item_order_path(@item), class: "btn btn-primary" %>
 </div>
 
