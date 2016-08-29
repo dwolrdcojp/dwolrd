@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'purchases' => "orders#purchases"
   get 'favorites' => "items#favorites"
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   resources   :items do
     resources :orders, only: [:new, :create]

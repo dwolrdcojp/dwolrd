@@ -22,6 +22,7 @@ gem 'figaro'
 gem 'bootstrap_form'
 gem 'paypal-sdk-adaptivepayments'
 gem 'stripe'
+gem 'omniauth-stripe-connect'
 
 group :development, :test do
   gem 'byebug',  '9.0.0', platform: :mri

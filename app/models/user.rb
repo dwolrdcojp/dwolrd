@@ -4,7 +4,7 @@ class User < ApplicationRecord
   attr_accessor :login
   before_validation :downcase_email
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   has_many :items,  :dependent  => :destroy
   has_many :comments
   has_many :sales, class_name: "Order", foreign_key: "seller_id"

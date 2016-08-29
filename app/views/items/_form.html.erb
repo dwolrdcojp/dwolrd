@@ -10,11 +10,37 @@
     </div>
   <% end %>
 
+  <div id="stripe-error" class="alert alert-danger" style="display:none">
+    <noscript> Javascript is not enabled and is required for this form. First enable it in your web browser settings</noscript>
+  </div>
+
   <%= f.text_field :title %>
   <%= f.text_area :content, placeholder: "Post some DOPE..." %>
   <%= f.text_area :price, placeholder: "$ -> ¥" %>
   <%= f.label :filepicker_url, "Upload Images" %>
   <%= f.filepicker_field :filepicker_url, multiple: true, mimetypes: 'image/jpeg,image/gif,image/png', max_size: 5120 * 1024  %><br>
+
+
+  <h1> Bank Account Information </h1>
+
+  <%= link_to image_tag('/light-on-light.png'), user_stripe_connect_omniauth_authorize_path %>
+
+  <div class="form-group">
+    <%= label_tag :country %>
+    <%= text_field_tag :country, nil, { :name => nil, :'data-stripe' => "country", class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :rounting_number %>
+    <%= text_field_tag :rounting_number, nil, { :name => nil, :'data-stripe' => "routingNumber", class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :account_number %>
+    <%= text_field_tag :account_number, nil, { :name => nil, :'data-stripe' => "accountNumber", class: "form-control" } %>
+  </div>
+
+
   <div class="center">
     <%= f.submit "Post", class: "btn btn-primary" %>
   </div>
