@@ -2,47 +2,6 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  require 'paypal-sdk-adaptivepayments'
-
-  def pay
-    p = Print.find_by(id: params[:id])
-    user = current_user
-    price = @order.item.price
-    commission = 0.06
-
-    # Build API call
-    @api = PayPal::SDK::AdaptivePayments.new
-    @pay = @api.build_pay({
-      :actionType => "PAY",
-      :cancelUrl => "http://localhost:3000/p/#{p.id}",
-      :returnUrl => "http://localhost:3000/#{p.path}",
-      :currencyCode => "USD",
-      :feesPayer => "PRIMARYRECEIVER",
-      :ipnNotificationUrl => "http://localhost:3000/paypal/ipn_notify",
-      :receiverList => {
-        :receiver => [{
-          :amount => price,
-          :email => current_user.email,
-          :primary => true },
-        {
-          :amount => price * (1 - commission),
-          :email => User.find(@order.item.user_id).email,
-          :primary => false }]
-        },
-        :memo => "Transaction for #{p.username}"
-      } || default_api_value)
-
-    # Make API call & get response
-    @response = @api.pay(@pay)
-
-    # Access response
-    if @response.success? && @response.payment_exec_status != "ERROR"
-      @response.payKey
-      @api.payment_url(@response)  # Url to complete payment
-    else
-      @response.error[0].message
-    end
-  end
 
   def sales
     @orders = Order.all.where(seller: current_user).order("created_at DESC")
@@ -73,16 +32,21 @@ class OrdersController < ApplicationController
     token = params[:stripeToken]
 
     begin
-      customer = Stripe::Customer.create(
-        :email => params[:stripeEmail],
-        :source  => params[:stripeToken]
-      )
+    #   customer = Stripe::Customer.create(
+    #     :email => params[:stripeEmail],
+    #     :source  => token
+    # )
 
-      charge = Stripe::Charge.create(
-        :customer => customer.id,
-        :amount => (@item.price * 100).floor,
-        :currency => "usd"
-      )
+      charge = Stripe::Charge.create({
+        # :customer => customer.id,
+        :source => token,
+        :amount => (@item.price * 91.1).floor - 30,
+        :currency => "usd",
+        :description => @item.title,
+        :application_fee => ((@item.price * 100) * 0.089).floor + 30
+      },
+      {:stripe_account => @item.user.uid }
+    )
       flash[:notice] = "Thanks for ordering!"
     rescue Stripe::CardError => e
       flash[:danger] = e.message
@@ -110,7 +74,9 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:address, :city, :state)
+      if params[:orders] && params[:orders][:stripe_card_token].present?
+        params.require(:orders).permit(:stripe_card_token)
+      end
     end
 
 end

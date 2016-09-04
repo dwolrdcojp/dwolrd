@@ -1,6 +1,5 @@
 <div class="col-md-4">
   <h3><%= @item.title %></h3>
-  <h4><%= number_to_currency(@item.price) %></h4>
   <div class="thumbnail">
   <%= filepicker_image_tag @item.filepicker_url.split(",").reverse.first, w: 500 %>
   </div>
@@ -62,7 +61,7 @@
   <% end %>
 </div>
 
-<%= form_tag charges_path do %>
+<%= bootstrap_form_for([@item, @order]) do |f| %>
   <article>
     <% if flash[:error].present? %>
       <div id="error_explanation">
@@ -70,13 +69,15 @@
       </div>
     <% end %>
     <label class="amount">
-      <span>Amount: $5.00</span>
+      <span><h4><%= number_to_currency(@item.price) %></h4></span>
     </label>
   </article>
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
-          data-amount="500"
+          data-description="<%= @item.title %>"
+          data-amount="<%= (@item.price * 100).floor %>"
+          data-email="<%= current_user.email %>"
+          data-shipping-address="true"
           data-locale="auto"></script>
 <% end %>
