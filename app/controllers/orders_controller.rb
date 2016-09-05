@@ -36,6 +36,7 @@ class OrdersController < ApplicationController
     #     :email => params[:stripeEmail],
     #     :source  => token
     # )
+    require 'json'
 
       charge = Stripe::Charge.create({
         # :customer => customer.id,
@@ -47,6 +48,13 @@ class OrdersController < ApplicationController
       },
       {:stripe_account => @item.user.uid }
     )
+      @order.name = params[:stripeShippingName]
+      @order.address = params[:stripeShippingAddressLine1]
+      @order.city = params[:stripeShippingAddressCity]
+      @order.state = params[:stripeShippingAddressState]
+      @order.zip = params[:stripeShippingAddressZip]
+      @order.country = params[:stripeShippingAddressCountry]
+
       flash[:notice] = "Thanks for ordering!"
     rescue Stripe::CardError => e
       flash[:danger] = e.message

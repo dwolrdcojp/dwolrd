@@ -12,7 +12,7 @@
   <%= @item.content %><br>
 
   <strong>Price:</strong>
-  <%= @item.price %><br>  
+  <%= number_to_currency(@item.price) %><br>  
 
   <strong>User:</strong>
   <%= @item.user.username%><br>

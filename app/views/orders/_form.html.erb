@@ -22,42 +22,7 @@
     <div id="stripe-error" class="alert alert-danger" style="display:none">
       <noscript> Javascript is not enabled and is required for this form. First enable it in your web browser settings</noscript>
     </div>
-    
-  <div class="form-group">
-    <%= f.text_field :address, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :city, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :state, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <div class="row">
-      <div class="col-md-8">
-        <%= label_tag :card_number, "Credit Card Number" %>
-        <%= text_field_tag :card_number, nil, { :name => nil, :'data-stripe' => "number", class: "form-control" } %>
-      </div>
-      <div class="col-md-4">
-        <%= label_tag :card_code, "CVC" %>
-        <%= text_field_tag :card_code, nil, { :name => nil, :'data-stripe' => "cvc", class: "form-control" } %>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-  <%= label_tag nil, "Expiration date" %>
-    <div class="row">
-      <div class="col-md-3">
-      <%= select_month nil, { use_two_digit_numbers: true }, { :name => nil, :'data-stripe' => "exp-month", class: "form-control" } %>
-      </div>
-      <div class="col-md-3">
-        <%= select_year nil, { start_year: Date.today.year, end_year: Date.today.year+10 }, { :name => nil, :'data-stripe' => "exp-year", class: "form-control" } %>
-      </div>
-    </div>
-  </div> 
-  <div class="form-group center">
-    <%= f.submit "Complete Order", class: "btn btn-success" %>
-  </div>
+
   <% end %>
 </div>
 
@@ -68,8 +33,9 @@
         <p><%= flash[:error] %></p>
       </div>
     <% end %>
+
     <label class="amount">
-      <span><h4><%= number_to_currency(@item.price) %></h4></span>
+      <span><h3><%= number_to_currency(@item.price) %></h3></span>
     </label>
   </article>
 
@@ -80,4 +46,5 @@
           data-email="<%= current_user.email %>"
           data-shipping-address="true"
           data-locale="auto"></script>
+
 <% end %>

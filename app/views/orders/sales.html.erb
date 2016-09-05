@@ -1,13 +1,30 @@
 <div class="center">
 <h1>Sold</h1>
 </div>
+<br>
+
   <% @orders.each do |order| %>
-    <div class="col-md-3">
+  <div class="row">
+  <div class="col-md-3">
         <%= filepicker_image_tag order.item.filepicker_url.split(",").last, w: 200, h: 200, fit: 'crop' %><br>
+  </div>
+<div class="col-md-2 center-row">
         <%= order.item.title %><br>
         <%= order.item.content %><br>
         <%= order.buyer.username %><br>
         <%= time_ago_in_words(order.item.created_at) %> ago.<br>
         <%= link_to 'Show', order.item %><br>
-    </div> 
-  <% end %>
+</div>
+<div class="col-md-4 text-center">
+        Ship to:<br>
+        <%= order.name %><br>
+        <%= order.address %><br>
+        <%= order.city %>,
+        <%= order.state %>
+        <%= order.zip %><br>
+        <%= order.country %><br>
+</div>
+</div>
+<br>
+<% end %>
+

@@ -44,8 +44,6 @@ ActiveRecord::Schema.define(version: 20160829032154) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
-    t.string   "picture"
-    t.json     "images"
     t.string   "filepicker_url"
     t.string   "username"
     t.integer  "price"
@@ -63,9 +61,12 @@ ActiveRecord::Schema.define(version: 20160829032154) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string   "name"
     t.string   "address"
     t.string   "city"
     t.string   "state"
+    t.string   "zip"
+    t.string   "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "item_id"
