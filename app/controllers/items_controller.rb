@@ -8,10 +8,7 @@ class ItemsController < ApplicationController
     @items = current_user.items
   end
 
-    def show
-    @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
-    redirect_to root_url and return unless @user.activated?
+  def show
   end
 
   # GET /items
@@ -23,11 +20,6 @@ class ItemsController < ApplicationController
     else
       @items = Item.all.order("created_at DESC")
     end
-  end
-
-  # GET /items/1
-  # GET /items/1.json
-  def show
   end
 
   # GET /items/new
@@ -85,14 +77,14 @@ class ItemsController < ApplicationController
     type = params[:type]
     if type == "favorite"
       current_user.favorites << @item
-      redirect_to :back, notice: "You favorited #{@item.title}"
+      redirect_to :back
 
     elsif type == "unfavorite"
       current_user.favorites.delete(@item)
-      redirect_to :back, notice: "Unfavorited #{@item.title}"
+      redirect_to :back
 
     else
-      redirect_to :back, notice: 'Nothing happened.'
+      redirect_to :back
     end
   end
 

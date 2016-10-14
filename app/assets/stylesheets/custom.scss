@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Roboto:100');
 
 /* mixins, variables, etc. */
 
@@ -14,11 +15,33 @@ $gray-medium-light: #eaeaea;
 
 /* universal */
 
-html, body {
-  background-color: #FFF;
-  color: #000;
+.hidden{
+  display: none;
 }
 
+html, body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-style: thin;
+}
+
+img {
+  border-radius: 7px;
+}
+
+.navbar {
+  background-color: #000;
+  color: #fff;
+}
+
+a {
+  color: #fff;
+}
+
+a:hover {
+  color: #fff;
+}
 
 body {
   padding-top: 0px;
@@ -30,6 +53,14 @@ section {
 
 textarea {
   resize: vertical;
+}
+
+.bold {
+  font-weight: bold;
+}
+.small {
+  font-size: 0.8em;
+  padding-bottom: 10px;
 }
 
 .center {
@@ -47,22 +78,29 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 3em;
-  letter-spacing: -2px;
+  letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 2em;
   letter-spacing: -1px;
   margin-bottom: 30px;
-  text-align: center;
+  font-weight: normal;
+}
+
+h4 {
+  font-size: 1.1em;
+  margin-bottom: 0px;
   font-weight: normal;
 }
 
 p {
-  font-size: 1.1em;
+  font-size: .9em;
   line-height: 1.7em;
+  color: #FFF;
+  margin-bottom: -5px;
 }
 
 /* Users index */
@@ -98,10 +136,10 @@ span.picture {
 #logo {
   float: left;
   margin-right: 10px;
-  font-size: 1.7em;
+  font-size: 1.9em;
   color: white;
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: -2px;
   padding-top: 10px;
   font-weight: bold;
   &:hover {
@@ -213,14 +251,7 @@ input {
   }
 }
 
-.checkbox {
-  margin-top: -20px;
-  margin-bottom: 10px;
-  span {
-    margin-left: 20px;
-    font-weight: normal;
-  }
-}
+
 
 #session_remember_me {
   margin-top: -20px;

@@ -1,0 +1,13 @@
+<h1><%= @user.username %>'s Garage</h1>
+      <% @user.items.each do |item| %>
+ <% if item.orders.any? %>
+        <% else %>
+          <div class="col-md-3">
+              <%= link_to(filepicker_image_tag(item.filepicker_url.split(",").last, w: 200, h: 200, fit: 'crop'), item) %><br>
+              <p class="bold"><%= item.title %><br></p>
+              <p><%= link_to number_to_currency(item.price), item %></p>
+              <p class="small"><%= time_ago_in_words(item.created_at) %> ago</p>
+          </div> 
+        <% end %>
+      <% end %>
+<br>

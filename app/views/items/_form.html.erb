@@ -14,18 +14,24 @@
     <noscript> Javascript is not enabled and is required for this form. First enable it in your web browser settings</noscript>
   </div>
 
+  
+  <center><div class="col-md-4 col-md-offset-4">
+  
+  <% if current_user.uid == nil %>
+    <h2> Bank Account Information </h2>
+
+      <%= link_to "Connect with Stripe!", user_stripe_connect_omniauth_authorize_path, class: "btn btn-danger btn-lg btn-block" %><br><br>
+  <% end %>
+
+
   <%= f.text_field :title %>
-  <%= f.text_area :content, placeholder: "Post some DOPE..." %>
-  <%= f.text_area :price, placeholder: "$ -> ¥" %>
-  <%= f.label :filepicker_url, "Upload Images" %>
-  <%= f.filepicker_field :filepicker_url, multiple: true, mimetypes: 'image/jpeg,image/gif,image/png', max_size: 5120 * 1024  %><br>
-
-
-  <h1> Bank Account Information </h1>
-
-  <%= link_to image_tag('/light-on-light.png'), user_stripe_connect_omniauth_authorize_path %>
+  <%= f.text_area :content, label: "Description", rows: 10 %>
+  <%= f.text_field :price %><br>
+  <%= f.filepicker_field :filepicker_url, multiple: true, mimetypes: 'image/jpeg,image/gif,image/png', max_size: 5120 * 1024, button_text: "Upload Pictures", button_class: 'btn btn-info btn-lg btn-block' %><br>
 
   <div class="center">
-    <%= f.submit "Post", class: "btn btn-primary" %>
+    <%= f.submit "Post" %>
   </div>
+</div>
+</center>
 <% end %>

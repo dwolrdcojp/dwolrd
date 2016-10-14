@@ -1,4 +1,4 @@
 <%= bootstrap_form_for([@item, @item.comments.build]) do |f| %>
-    <%= f.text_area :body, placeholder: "add a comment" %>
-    <%= f.submit "Add Comment" %>
+    <%= f.text_area :body, placeholder: "I want this...", hide_label: true %>
+    <center><%= f.submit "Ask a question" %></center>
 <% end %>

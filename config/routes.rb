@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
+  get '/items/new' => 'items#new', as: :user_root
+
   resources   :items do
     resources :orders, only: [:new, :create]
     resources :comments
@@ -24,4 +26,5 @@ Rails.application.routes.draw do
 
   resources :transactions, only: [:new, :create]
   
+  resources :users
 end

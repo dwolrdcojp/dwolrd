@@ -1,14 +1,5 @@
 <% @item.comments.each do |comment| %>
-  <p>
-    <strong>User:</strong>
-    <%= comment.user.username %>
-  </p>
-  <p>
-    <b>Comment:</b>
-    <%= comment.body %>
-  </p>
-  <p>
-  <%= time_ago_in_words(@item.created_at) %> ago
-  </p>
-  </br>
+	<b><%= link_to comment.user.username, user_path(comment.user.id) %> said... </b> <%= comment.body %>
+    <p class="small"><%= time_ago_in_words(@item.created_at) %> ago</p>
 <% end %>
+

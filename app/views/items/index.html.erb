@@ -18,13 +18,14 @@
 
 <h1>Items</h1>
       <% @items.each do |item| %>
-        <div class="col-md-3">
-            <%= filepicker_image_tag item.filepicker_url.split(",").last, w: 200, h: 200, fit: 'crop' %><br>
-            <%= item.title %><br>
-            <%= item.content %><br>
-            <%= item.user.username %><br>
-            Posted <%= time_ago_in_words(item.created_at) %> ago.<br>
-            <%= link_to 'Show', item %><br>
-        </div> 
+      <% if item.orders.any? %>
+        <% else %>
+          <div class="col-md-3">
+              <%= link_to(filepicker_image_tag(item.filepicker_url.split(",").last, w: 200, h: 200, fit: 'crop'), item) %><br>
+              <p class="bold"><%= item.title %><br></p>
+              <p><%= link_to number_to_currency(item.price), item %></p>
+              <p class="small"><%= time_ago_in_words(item.created_at) %> ago</p>
+          </div> 
+        <% end %>
       <% end %>
 <br>
