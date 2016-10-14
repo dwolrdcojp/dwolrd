@@ -13,3 +13,7 @@ test:
   pool: 5
   username: Max
   password:
+
+production:
+  encoding: utf8
+  pool: 15
