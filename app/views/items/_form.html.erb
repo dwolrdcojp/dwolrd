@@ -21,7 +21,7 @@
     <h2> Bank Account Information </h2>
 
       <%= link_to "Connect with Stripe!", user_stripe_connect_omniauth_authorize_path, class: "btn btn-danger btn-lg btn-block" %><br><br>
-  <% end %>
+<% else %>
 
 
   <%= f.text_field :title %>
@@ -34,4 +34,6 @@
   </div>
 </div>
 </center>
+
+<% end %>
 <% end %>
