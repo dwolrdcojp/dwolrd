@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
         :amount => (@item.price * 100),
         :currency => "usd",
         :description => @item.title,
-        :application_fee => ((@item.price * 100) * 0.089).floor + 30
+        :application_fee => ((@item.price * 100) * 0.06).floor
       },
       {:stripe_account => @item.user.uid }
     )
