@@ -32,15 +32,15 @@ class OrdersController < ApplicationController
 
     begin
     
-    customer = Stripe::Customer.create(
-        :email => params[:stripeEmail],
-        :source  => token
-    )
+    # customer = Stripe::Customer.create(
+    #     :email => params[:stripeEmail],
+    #     :source  => token
+    # )
 
     require 'json'
 
       charge = Stripe::Charge.create({
-        :customer => customer.id,
+        :source => token,
         :amount => (@item.price * 91.1).floor - 30,
         :currency => "usd",
         :description => @item.title,
