@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
         :description => @item.title,
         :application_fee => ((@item.price * 100) * 0.089).floor + 30
       },
-      {:stripe_account => @item.user.access_code }
+      {:stripe_account => @item.user.uid}
     )
       @order.name = params[:stripeShippingName]
       @order.address = params[:stripeShippingAddressLine1]
