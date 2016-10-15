@@ -1,6 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def stripe_connect
+    raise request.env["omniauth.auth"].to_yaml
     @user = current_user
     if @user.update_attributes({
       provider: request.env["omniauth.auth"].provider,
