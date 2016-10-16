@@ -17,7 +17,7 @@ Posted by <%= link_to @item.user.username, user_path(@item.user.id) %> <%= time_
 
 <%= pluralize(@item.favorited_by.count, 'user') %> favorited this<br>
 
-<% if current_user.favorite_items.collect(&:item_id).include?(@item.id) %>
+<% if current_user && current_user.favorite_items.collect(&:item_id).include?(@item.id) %>
       <span class="glyphicon glyphicon-star"></span> <%= link_to "Unfavorite", favorite_item_path(@item, 
                                                           type: "unfavorite"), 
                                                           method: :put %><br>
