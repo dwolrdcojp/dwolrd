@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>D-WOLRD: POWER SHOP</title>
+    <title>
+      <%= if content_for?(:title) then yield(:title) + ' | ' end %>D-WOLRD: POWER SHOP | An online marketplace to buy and sell Japanese car parts.
+    </title>
+
+<meta name="description" content="<%= yield_meta_tag(:description, "An online marketplace to buy and sell Japanese car parts.") %>" />
+<meta name="keywords" content="<%= yield_meta_tag(:keywords, "D-WOLRD, POWER SHOP, JDM Car Parts Marketplace, JDM Parts, JDM Cars, Drift Cars, Touge, Street Racing, JDM Engines, JDM Wheels, Driftwolrd, Drifting Car Parts, Drift, JDM, JAPAN") %>" />
+
+
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
   </head>
