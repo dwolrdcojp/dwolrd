@@ -42,7 +42,7 @@
 
 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-image="<%= filepicker_image_tag @item.filepicker_url.split(",").reverse.first %>"
+          data-image="<%= @item.filepicker_url.split(",").reverse.first %>"
           data-name="<%= "D-WOLRD: POWER SHOP" %>"
           data-description="<%= @item.title %>"
           data-amount="<%= ((@item.price + @item.shipping_price) * 100).floor %>"
