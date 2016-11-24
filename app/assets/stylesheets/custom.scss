@@ -19,16 +19,48 @@ $gray-medium-light: #eaeaea;
   display: none;
 }
 
+.jumbotron {
+    position: relative;
+    background: #000 url("/jdm.jpg") center top;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+    padding-top: 0px;
+    padding-bottom: 40px;
+}
+
+
+.well {
+    position: relative;
+    background: #000;
+    border-width: 0px;
+    padding-top: 0px;
+}
+
 html, body {
   background-color: #000;
   color: #fff;
   font-family: 'Roboto', sans-serif;
   font-style: thin;
+  padding-top: 0px;
+  margin: 0 auto;
+  padding: 0 auto;
+  width: 100%; 
 }
+
 
 img {
   border-radius: 7px;
 }
+
+#img.source-image {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 
 .navbar {
   background-color: #000;
@@ -44,7 +76,7 @@ a:hover {
 }
 
 body {
-  padding-top: 0px;
+
 }
 
 section {
@@ -286,6 +318,7 @@ footer {
 }
 
 /* miscellaneous */
+
 
 .debug_dump {
   clear: both;

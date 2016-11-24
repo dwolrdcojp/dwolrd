@@ -39,7 +39,7 @@ Posted by <%= link_to @item.user.username, user_path(@item.user.id) %> <%= time_
   <div data-turbolinks="false">
   <%= link_to "SOLD!", root_path, class: "btn btn-danger btn-lg btn-block" %>
   </div>
-<% else %>
+<% elsif @item.user != current_user %>
   <div data-turbolinks="false">
   <%= link_to "Buy", new_item_order_path(@item), class: "btn btn-success btn-lg btn-block" %>
   </div>

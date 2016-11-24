@@ -1,3 +1,21 @@
+<% if user_signed_in? %>
+
+<% else %>
+
+<div class="jumbotron"><br>
+  <h1>D-WOLRD: POWER SHOP</h1>
+  <center><br><br><br><br><br>
+  <p>
+
+  Looking for an easier way to find your next dope automotive purchase? <br>Sign-up now to start using the best site to buy and sell Japanese car parts.<br><br>
+  Use the POWER SHOP to find rare parts from the shops you love!
+  </p>
+
+  </center>
+</div>
+
+<% end %>
+
 <header class="navbar navbar-static-top navbar-inverse">
   <div data-turbolinks="false" class="container">
     <%= link_to "D-WOLRD: POWER SHOP", root_path, id: "logo" %>
