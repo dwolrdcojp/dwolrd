@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   validates :title,    :presence  => true,
                        :length    => { :minimum => 5 }
   validates :price,    :presence  => true
-
+  validates :shipping_price,    :presence  => true
   has_many :comments, :dependent  => :destroy
   has_many :orders
   has_many :favorite_items
