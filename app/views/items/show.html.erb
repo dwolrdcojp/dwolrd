@@ -11,7 +11,7 @@
 <div class="cold-md-4 col-md-offset-7">
 
   <h1><%= @item.title %></h1>
-  <h2><%= number_to_currency(@item.price) %></h2> + <%= number_to_currency(@item.shipping_price) %> shipping
+  <h2><%= number_to_currency(@item.price) %> + <%= number_to_currency(@item.shipping_price) Shipping %></h2>  
 
   <%= @item.content %><br><br>
 
