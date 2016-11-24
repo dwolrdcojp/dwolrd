@@ -26,7 +26,8 @@
 
   <%= f.text_field :title %>
   <%= f.text_area :content, label: "Description", rows: 10 %>
-  <%= f.text_field :price %><br>
+  <%= f.text_field :price %>
+  <%= f.text_field :shipping_price %><br>
   <%= f.filepicker_field :filepicker_url, multiple: true, mimetypes: 'image/jpeg,image/gif,image/png', max_size: 5120 * 1024, button_text: "Upload Pictures", button_class: 'btn btn-info btn-lg btn-block' %><br>
 
   <div class="center">

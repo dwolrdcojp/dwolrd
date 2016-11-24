@@ -36,7 +36,7 @@
     <% end %>
 
     <label class="amount">
-      <span><h3><%= number_to_currency(@item.price) %></h3></span>
+      <span><h3><%= number_to_currency(@item.price) "+" number_to_currency(@item.shipping_price) %></h3></span>
     </label>
   </article>
 
@@ -45,7 +45,7 @@
           data-image="<%= filepicker_image_tag @item.filepicker_url.split(",").reverse.first %>"
           data-name="D-WOLRD: POWER SHOP"
           data-description="<%= @item.title %>"
-          data-amount="<%= (@item.price * 100).floor %>"
+          data-amount="<%= ((@item.price + @item.shipping_price) * 100).floor %>"
           data-email="<%= current_user.email %>"
           data-shipping-address="true"
           data-locale="auto"></script>
