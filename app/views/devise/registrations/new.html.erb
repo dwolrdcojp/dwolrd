@@ -7,7 +7,7 @@
     <%= f.text_field :username %>
     <%= f.email_field :email, autofocus: true %>
     <%= f.password_field :password, autocomplete: "off" %>
-    <%= f.password_field :password_confirmation, autocomplete: "off" %><br>
+    <%= f.password_field :password_confirmation, label: "Password Confirmation", autocomplete: "off" %><br>
 
   <div class="actions center">
     <%= f.submit "Sign up", class: "btn btn-info btn-lg btn-block"  %>
