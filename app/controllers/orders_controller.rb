@@ -41,10 +41,10 @@ class OrdersController < ApplicationController
 
       charge = Stripe::Charge.create({
         :source => token,
-        :amount => ((@item.price + @item.shipping_price) * 100),
+        :amount => ((@item.price + @item.shipping_price.to_i) * 100),
         :currency => "usd",
         :description => @item.title,
-        :application_fee => (((@item.price + @item.shipping_price) * 100) * 0.06).floor
+        :application_fee => (((@item.price + @item.shipping_price.to_i) * 100) * 0.06).floor
       },
       {:stripe_account => @item.user.uid }
     )
