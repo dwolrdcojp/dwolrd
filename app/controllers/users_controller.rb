@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :deny_access
 
   def index
-
+    redirect_to :back
   end
 
   def show
