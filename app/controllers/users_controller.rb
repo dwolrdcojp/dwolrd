@@ -18,6 +18,8 @@ class UsersController < ApplicationController
   end
 
   def template_not_found
+    redirect_to :back
+  rescue ActionView::MissingTemplate
     redirect_to root_path
   end
 
