@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  rescue_from ActiveRecord::RecordNotFound, with: :deny_access
 
 
   def sales
@@ -72,6 +73,10 @@ class OrdersController < ApplicationController
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def deny_access
+    redirect_to :back, notice: 'Nothing happened.'
   end
 
   private
