@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
       flash[:notice] = "Thanks for ordering!"
     rescue Stripe::CardError => e
       flash[:danger] = e.message
-      redirect_to new_order_path
+      redirect_to new_item_order_path
     end
 
     respond_to do |format|
