@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   rescue_from ActiveRecord::RecordNotFound, with: :deny_access
+  rescue_from ActionView::MissingTemplate, with: :template_not_found
 
   def index
 
@@ -13,6 +14,10 @@ class UsersController < ApplicationController
   def deny_access
     redirect_to :back
   rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def template_not_found
     redirect_to root_path
   end
 

@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   rescue_from ActiveRecord::RecordNotFound, with: :deny_access
+  rescue_from ActionView::MissingTemplate, with: :template_not_found
       
 
   def garage
@@ -96,6 +97,10 @@ class ItemsController < ApplicationController
   def deny_access
     redirect_to :back
   rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def template_not_found
     redirect_to root_path
   end
 

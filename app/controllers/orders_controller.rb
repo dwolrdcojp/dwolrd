@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, with: :deny_access
+  rescue_from ActionView::MissingTemplate, with: :template_not_found
 
 
   def sales
@@ -79,6 +80,10 @@ class OrdersController < ApplicationController
   def deny_access
     redirect_to :back
   rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def template_not_found
     redirect_to root_path
   end
 
