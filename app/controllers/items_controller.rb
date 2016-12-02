@@ -93,12 +93,10 @@ class ItemsController < ApplicationController
     @items = current_user.favorites
   end
 
-  def deny_access(default = root_url)
-    if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
-      redirect_to :back, notice: 'Nothing happened.'
-    else
-      redirect_to default, notice: 'Nothing happened.'
-    end
+  def deny_access
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
   end
 
   private
