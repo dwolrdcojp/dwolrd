@@ -30,50 +30,92 @@ class OrdersController < ApplicationController
     @order.buyer_id = current_user.id
     @order.seller_id = @seller.id
 
-    token = params[:stripeToken]
+    # p = Print.find_by(id: params[:id])
+    # creator = Creator.find_by(id: p.creator_id)
+    price = ((@item.price + @item.shipping_price.to_i) * 100)
+    commission = 0.06
 
-    begin
+    # Build API call
+    @api = PayPal::SDK::AdaptivePayments.new
+    @pay = @api.build_pay({
+      :actionType => "PAY",
+      :cancelUrl => "http://localhost:3000/",
+      :returnUrl => "http://localhost:3000/",
+      :currencyCode => "USD",
+      :feesPayer => "PRIMARYRECEIVER",
+      :ipnNotificationUrl => "http://localhost:3000/paypal/ipn_notify",
+      :receiverList => {
+        :receiver => [
+          {
+            :amount => price,
+            :email => "dwolrdcojp-facilitator@gmail.com",
+            :primary => true
+          },
+          {
+            :amount => price * (1 - commission),
+            :email => @item.user.email,
+            :primary => false
+          }
+        ]
+      }})
+
+    # Make API call
+    @response = @api.pay(@pay)
+
+    # Check if call was valid, if so, redirect to PayPal payment url
+    if @response.success?
+      @respone.payKey
+      redirect_to @api.payment_url(@response)
+    else
+      @response.error
+    end
+
+
+
+    # token = params[:stripeToken]
+
+    # begin
     
-    # customer = Stripe::Customer.create(
-    #     :email => params[:stripeEmail],
-    #     :source  => token
+    # # customer = Stripe::Customer.create(
+    # #     :email => params[:stripeEmail],
+    # #     :source  => token
+    # # )
+
+    # require 'json'
+
+    #   charge = Stripe::Charge.create({
+    #     :source => token,
+    #     :amount => ((@item.price + @item.shipping_price.to_i) * 100),
+    #     :currency => "usd",
+    #     :description => @item.title,
+    #     :application_fee => (((@item.price + @item.shipping_price.to_i) * 100) * 0.06).floor
+    #   },
+    #   {:stripe_account => @item.user.uid }
     # )
+    #   @order.name = params[:stripeShippingName]
+    #   @order.address = params[:stripeShippingAddressLine1]
+    #   @order.city = params[:stripeShippingAddressCity]
+    #   @order.state = params[:stripeShippingAddressState]
+    #   @order.zip = params[:stripeShippingAddressZip]
+    #   @order.country = params[:stripeShippingAddressCountry]
 
-    require 'json'
+    #   flash[:notice] = "Thanks for ordering!"
+    # rescue Stripe::CardError => e
+    #   flash[:danger] = e.message
+    #   redirect_to new_item_order_path
+    # end
 
-      charge = Stripe::Charge.create({
-        :source => token,
-        :amount => ((@item.price + @item.shipping_price.to_i) * 100),
-        :currency => "usd",
-        :description => @item.title,
-        :application_fee => (((@item.price + @item.shipping_price.to_i) * 100) * 0.06).floor
-      },
-      {:stripe_account => @item.user.uid }
-    )
-      @order.name = params[:stripeShippingName]
-      @order.address = params[:stripeShippingAddressLine1]
-      @order.city = params[:stripeShippingAddressCity]
-      @order.state = params[:stripeShippingAddressState]
-      @order.zip = params[:stripeShippingAddressZip]
-      @order.country = params[:stripeShippingAddressCountry]
-
-      flash[:notice] = "Thanks for ordering!"
-    rescue Stripe::CardError => e
-      flash[:danger] = e.message
-      redirect_to new_item_order_path
-    end
-
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to root_url }
-        format.json { render :show, status: :created, location: @order }
-      else
-        flash[:alert] = "Something went wrong :("
-        # gon.client_token = generate_client_token
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @order.save
+    #     format.html { redirect_to root_url }
+    #     format.json { render :show, status: :created, location: @order }
+    #   else
+    #     flash[:alert] = "Something went wrong :("
+    #     # gon.client_token = generate_client_token
+    #     format.html { render :new }
+    #     format.json { render json: @order.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
 
