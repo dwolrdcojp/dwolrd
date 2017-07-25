@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
 
     # p = Print.find_by(id: params[:id])
     # creator = Creator.find_by(id: p.creator_id)
-    price = ((@item.price + @item.shipping_price.to_i) * 100)
+    price = (@item.price + @item.shipping_price.to_i)
     commission = 0.06
 
     # Build API call
@@ -52,22 +52,22 @@ class OrdersController < ApplicationController
             :primary => true
           },
           {
-            :amount => price * (1 - commission),
-            :email => @item.user.email,
+            :amount => (price * (1 - commission)).round(2),
+            :email => "dwolrdcojp_seller@example.com",
             :primary => false
           }
         ]
       }})
 
-    # Make API call
-    @response = @api.pay(@pay)
+   # Make API call
+    @pay_response = @api.pay(@pay)
 
     # Check if call was valid, if so, redirect to PayPal payment url
-    if @response.success?
-      @respone.payKey
-      redirect_to @api.payment_url(@response)
+    if @pay_response.success?
+      @pay_response.payKey
+      redirect_to @api.payment_url(@pay_response)
     else
-      @response.error
+      redirect_to root_path, alert: @pay_response.error[0].message
     end
 
 

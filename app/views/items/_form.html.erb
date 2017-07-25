@@ -17,11 +17,7 @@
   
   <center><div class="col-md-4 col-md-offset-4">
   
-  <% if current_user.uid == nil %>
-    <h2> Bank Account Information </h2>
 
-      <%= link_to "Connect with Stripe!", user_stripe_connect_omniauth_authorize_path, class: "btn btn-danger btn-lg btn-block" %><br><br>
-<% else %>
 
 
   <%= f.text_field :title %>
@@ -36,5 +32,4 @@
 </div>
 </center>
 
-<% end %>
 <% end %>
