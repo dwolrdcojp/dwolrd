@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Payment Notifications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @payment_notifications.each do |payment_notification| %>
+      <tr>
+        <td><%= link_to 'Show', payment_notification %></td>
+        <td><%= link_to 'Edit', edit_payment_notification_path(payment_notification) %></td>
+        <td><%= link_to 'Destroy', payment_notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Payment Notification', new_payment_notification_path %>

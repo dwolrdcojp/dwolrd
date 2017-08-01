@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
-  get 'transactions/new'
+
+
 
   root 'items#index'
   
   get '/about',   to: 'static_pages#about'
   get '/garage',  to: 'items#garage'
+  post '/paypal/ipn_notify', to: 'orders#notify'
   get 'sales'     => "orders#sales"
   get 'purchases' => "orders#purchases"
   get 'favorites' => "items#favorites"

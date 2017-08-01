@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
     if params[:search]
       @items = Item.search(params[:search]).order("created_at DESC")
     else
-      @items = Item.all.order("created_at DESC")
+      @items = Item.all.includes(:orders).order("created_at DESC")
     end
   end
 
@@ -114,6 +114,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :content, :filepicker_url, :price, :shipping_price)
+      params.require(:item).permit(:title, :content, :filepicker_url, :price, :shipping_price, :paypal_email)
     end
 end

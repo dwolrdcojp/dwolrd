@@ -29,3 +29,11 @@ development:
 production:
   <<: *default
   mode: live
+
+   # Credentials for Classic APIs
+  app_id: APP-07X32353PT380991D
+  username: dwolrdcojp_api1.gmail.com
+  password: LQVLFSV3WLP8FL39
+  signature: AiPC9BjkCyDFQXbSkoZcgqH3hpacAF-wHqmkE9W0DrGusGTpqOYdMwvD
+
+
