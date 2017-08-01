@@ -23,7 +23,7 @@ gem 'bootstrap_form'
 gem 'paypal-sdk-adaptivepayments'
 gem 'stripe'
 gem 'omniauth-stripe-connect'
-# gem 'appsignal'
+gem 'newrelic_rpm'
 gem 'sendgrid-ruby'
 
 group :development, :test do
