@@ -38,11 +38,11 @@ class OrdersController < ApplicationController
     @api = PayPal::SDK::AdaptivePayments.new
     @pay = @api.build_pay({
       :actionType => "PAY",
-      :cancelUrl => new_item_order_path,
+      :cancelUrl => "https://www.d-wolrd.com/" + new_item_order_path,
       :returnUrl => root_url,
       :currencyCode => "USD",
       :feesPayer => "PRIMARYRECEIVER",
-      :ipnNotificationUrl => paypal_ipn_notify_path,
+      :ipnNotificationUrl => "https://www.d-wolrd.com/" + paypal_ipn_notify_path,
       :receiverList => {
         :receiver => [
           {
