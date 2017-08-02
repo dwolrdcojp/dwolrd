@@ -5,6 +5,15 @@
       <%= if content_for?(:title) then yield(:title) + ' | ' end %>D-WOLRD: POWER SHOP | An online marketplace to buy and sell Japanese car parts.
     </title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
+    <meta name="theme-color" content="#ffffff">
+    <%= favicon_link_tag 'favicon.ico' %>
+
+
 <meta name="description" content="<%= yield_meta_tag(:description, "An online marketplace to buy and sell Japanese car parts.") %>" />
 <meta name="keywords" content="<%= yield_meta_tag(:keywords, "D-WOLRD, POWER SHOP, JDM Car Parts Marketplace, JDM Parts, JDM Cars, Drift Cars, Touge, Street Racing, JDM Engines, JDM Wheels, Driftwolrd, Drifting Car Parts, Drift, JDM, JAPAN") %>" />
 
