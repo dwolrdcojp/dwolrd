@@ -37,6 +37,7 @@ class OrdersController < ApplicationController
     # Build API call
     @api = PayPal::SDK::AdaptivePayments.new
     @pay = @api.build_pay({
+      :LOGOIMG => "https://www.d-wolrd.com/paypal_logo.jpg",
       :actionType => "PAY",
       :cancelUrl => "https://www.d-wolrd.com/" + new_item_order_path,
       :returnUrl => root_url,
