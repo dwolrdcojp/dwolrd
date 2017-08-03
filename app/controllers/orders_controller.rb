@@ -37,13 +37,12 @@ class OrdersController < ApplicationController
     # Build API call
     @api = PayPal::SDK::AdaptivePayments.new
     @pay = @api.build_pay({
-      :LOGOIMG => "https://www.d-wolrd.com/paypal_logo.jpg",
       :actionType => "PAY",
-      :cancelUrl => "https://www.d-wolrd.com/" + new_item_order_path,
+      :cancelUrl => "https://www.d-wolrd.com" + new_item_order_path,
       :returnUrl => root_url,
       :currencyCode => "USD",
       :feesPayer => "PRIMARYRECEIVER",
-      :ipnNotificationUrl => "https://www.d-wolrd.com/" + paypal_ipn_notify_path,
+      :ipnNotificationUrl => "https://www.d-wolrd.com" + paypal_ipn_notify_path,
       :receiverList => {
         :receiver => [
           {
@@ -63,11 +62,11 @@ class OrdersController < ApplicationController
     @pay_response = @api.pay(@pay)
 
     # Check if call was valid, if so, redirect to PayPal payment url
-    if @pay_response.success?
+    if @pay_response.success? && params[:order].values_at(:name, :address, :city, :state, :zip, :country).all?(&:present?)
       @pay_response.payKey
       redirect_to @api.payment_url(@pay_response)
     else
-      redirect_to root_path, alert: @pay_response.error[0].message
+      redirect_to new_item_order_path, alert: "Please fill in all shipping info!"
     end
 
   end
@@ -85,15 +84,10 @@ class OrdersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      if params[:orders] && params[:orders][:stripe_card_token].present?
-        params.require(:orders).permit(:stripe_card_token)
-      end
+      params.require(:order).permit(:name, :address, :city, :state, :zip, :country)
     end
 
   protected
