@@ -79,14 +79,14 @@ class ItemsController < ApplicationController
     type = params[:type]
     if type == "favorite"
       current_user.favorites << @item
-      redirect_to :back
+      redirect_to @item
 
     elsif type == "unfavorite"
       current_user.favorites.delete(@item)
-      redirect_to :back
+      redirect_to @item
 
     else
-      redirect_to :back
+      redirect_to @item
     end
   end
 
