@@ -8,8 +8,10 @@ class Item < ApplicationRecord
   validates :content,  :presence  => true
   validates :title,    :presence  => true,
                        :length    => { :minimum => 5 }
-  validates :price,    :presence  => true
+  validates :price,    :presence  => true, 
+                        numericality: { greater_than_or_equal_to: 1 }
   validates :shipping_price,    :presence  => true
+  validates :paypal_email,      :presence  => true
   has_many :comments, :dependent  => :destroy
   has_many :orders
   has_many :favorite_items
