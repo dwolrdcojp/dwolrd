@@ -1,7 +1,9 @@
-<div class="center col-md-6 col-md-offset-3">
-  <h3><%= @item.title %></h3>
-
+<div class="center col-md-5 ">
+  <h3>You are about to purchase...
+  <br><%= @item.title %> for <%= number_to_currency(@item.price + @item.shipping_price) %> 
+ </h3><br>
   <%= filepicker_image_tag @item.filepicker_url.split(",").reverse.first, w: 500 %>
+
 
 </div>
 
@@ -25,47 +27,52 @@
     </div>
 
   <% end %>
+
 </div>
-<div class="center col-md-4 col-md-offset-4">
+
+
+
+
+<div class="center col-md-4 col-md-offset-2">
+
+    <article>
+      <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <p><%= flash[:error] %></p>
+        </div>
+      <% end %>
+    </article>
+
 <%= bootstrap_form_for([@item, @order]) do |f| %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
 
-    <label class="amount">
-      <span><h3>Total Amount: <%= number_to_currency(@item.price + @item.shipping_price) %> </h3></span>
-    </label>
-  </article>
 
-  <h3>Shipping Info</h3>
-
-  <%= f.text_field :name %>
-  <%= f.text_field :address %>
-  <%= f.text_field :city %>
-  <%= f.text_field :state %>
-  <%= f.text_field :zip %>
-  <%= f.text_field :country %>
   <br>
-
-    <div class="center">
-    <%= f.submit "PayPal Express Checkout", class: "btn btn-success btn-lg btn-block" %>
+  <h3>Shipping Info</h3><br><br><br>
   </div>
 
-<!-- <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-image="<%= @item.filepicker_url.split(",").reverse.first %>"
-          data-name="D-WOLRD: POWER SHOP"
-          data-description="<%= @item.title %>"
-          data-amount="<%= ((@item.price + @item.shipping_price) * 100).floor %>"
-          data-email="<%= current_user.email %>"
-          data-shipping-address="true"
-          data-zip-code="true"
-          data-panel-label="Pay <%= @item.username %> "
-          data-label="Purchase with STRIPE"
-          data-locale="auto"></script> -->
+  <div class="col-md-4 col-md-offset-2">
+  <%= f.text_field :name %>
+  </div>
+  <div class="col-md-4 col-md-offset-2">
+  <%= f.text_field :address %>
+  </div>
+  <div class="row col-md-2 col-md-offset-2">
+  <%= f.text_field :city %> 
+  </div>
+  <div class="row col-md-1 col-md-offset-0">
+  <%= f.text_field :state %>
+  </div>
+  <div class="row col-md-1 col-md-offset-0">
+  <%= f.text_field :zip %>
+  </div>
+
+
+  <div class="col-md-4 col-md-offset-2">
+    <%= f.text_field :country%><br><br>
+      <div class="center">
+      <%= f.submit "PayPal Express Checkout", class: "btn btn-success btn-lg btn-block" %>
+      </div>
+  </div>
 
 <% end %>
 </div>
