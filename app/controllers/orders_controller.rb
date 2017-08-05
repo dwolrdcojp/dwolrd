@@ -79,7 +79,9 @@ class OrdersController < ApplicationController
     when "VERIFIED"
       @@order.save
     when "INVALID"
+      @@order.save
     else
+      @@order.save
     end
     render :nothing => true
   end
