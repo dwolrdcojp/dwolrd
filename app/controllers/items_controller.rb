@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
-  rescue_from ActiveRecord::RecordNotFound, with: :deny_access
-  rescue_from ActionView::MissingTemplate, with: :template_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :rescue
+  rescue_from ActionView::MissingTemplate, with: :rescue
       
 
   def garage
@@ -94,24 +94,15 @@ class ItemsController < ApplicationController
     @items = current_user.favorites
   end
 
-  def deny_access
-    redirect_to :back
-  rescue ActionController::RedirectBackError
-    redirect_to root_path
-  end
-
-  def template_not_found
-    redirect_to :back
-  rescue ActionView::MissingTemplate
-    redirect_to root_path
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
     end
 
+    def rescue
+      redirect_to root_url
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:title, :content, :filepicker_url, :price, :shipping_price, :paypal_email)

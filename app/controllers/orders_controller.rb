@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, :except => [:notify]
   skip_before_action :verify_authenticity_token
   protect_from_forgery :except => [:notify]
+  rescue_from ActiveRecord::RecordNotFound, with: :rescue
+  rescue_from ActionView::MissingTemplate, with: :rescue
 
   def sales
     @orders = Order.all.where(seller: current_user).order("created_at DESC")
@@ -86,6 +88,10 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    def rescue
+      redirect_to root_url
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
