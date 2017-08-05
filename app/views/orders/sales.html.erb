@@ -7,7 +7,7 @@
   <div class="row">
   <div class="col-md-3">
         <%= link_to(filepicker_image_tag(order.item.filepicker_url.split(",").last, w: 200, h: 200, fit: 'crop'), item_path(order.item.id)) %><br>
-  </div>
+  </div><br>
 <div class="col-md-2 center-row">
         <%= order.item.title.upcase %><br><br>
         Buyer: <%= order.buyer.username %><br><br>
@@ -18,6 +18,7 @@
         <%= order.state %>
         <%= order.zip %><br>
         <%= order.country %><br>
+        ___________________________________
 </div>
 </div>
 <br>
