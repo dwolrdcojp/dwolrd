@@ -43,7 +43,7 @@
       <% end %>
     </article>
 
-  <% if @item.order.any? %>
+  <% if @item.order.nil? = false %>
   <br><br><br>
   <h2> Aww rats... it looks like someone already ordered this. </h2>
   <% else %>
