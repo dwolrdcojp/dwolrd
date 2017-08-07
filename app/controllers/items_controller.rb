@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
     if params[:search]
       @items = Item.search(params[:search]).order("created_at DESC")
     else
-      @items = Item.all.includes(:orders).order("created_at DESC")
+      @items = Item.all.includes(:order).order("created_at DESC")
     end
   end
 
