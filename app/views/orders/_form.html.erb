@@ -23,7 +23,7 @@
   <h2> Aww rats... it looks like someone already ordered this. </h2>
   <% else %>
 
-  <%= bootstrap_form_for([@item, @order]) do |f| %>
+  <%= bootstrap_form_for @order, url: item_order_path do |f| %>
 
 
     <br>
