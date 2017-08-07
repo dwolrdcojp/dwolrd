@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   validates :shipping_price,    :presence  => true
   validates :paypal_email,      :presence  => true
   has_many :comments, :dependent  => :destroy
-  has_many :orders
+  has_one :order
   has_many :favorite_items
   has_many :favorited_by, through: :favorite_items, source: :user
 

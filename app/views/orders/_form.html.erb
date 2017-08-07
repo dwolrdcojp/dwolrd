@@ -43,36 +43,41 @@
       <% end %>
     </article>
 
-<%= bootstrap_form_for([@item, @order]) do |f| %>
+  <% if @item.orders.any? %>
+  <br><br><br>
+  <h2> Aww rats... it looks like someone already ordered this. </h2>
+  <% else %>
+
+  <%= bootstrap_form_for([@item, @order]) do |f| %>
 
 
-  <br>
-  <h3>Shipping Info</h3><br><br>
-  </div>
+    <br>
+    <h3>Shipping Info</h3><br><br>
+    </div>
 
-  <div class="col-md-4 col-md-offset-2">
-  <%= f.text_field :name %>
-  </div>
-  <div class="col-md-4 col-md-offset-2">
-  <%= f.text_field :address %>
-  </div>
-  <div class="row col-md-2 col-md-offset-2">
-  <%= f.text_field :city %> 
-  </div>
-  <div class="row col-md-1 col-md-offset-0">
-  <%= f.text_field :state %>
-  </div>
-  <div class="row col-md-1 col-md-offset-0">
-  <%= f.text_field :zip %>
-  </div>
+    <div class="col-md-4 col-md-offset-2">
+    <%= f.text_field :name %>
+    </div>
+    <div class="col-md-4 col-md-offset-2">
+    <%= f.text_field :address %>
+    </div>
+    <div class="row col-md-2 col-md-offset-2">
+    <%= f.text_field :city %> 
+    </div>
+    <div class="row col-md-1 col-md-offset-0">
+    <%= f.text_field :state %>
+    </div>
+    <div class="row col-md-1 col-md-offset-0">
+    <%= f.text_field :zip %>
+    </div>
 
+    <div class="col-md-4 col-md-offset-2">
+      <%= f.text_field :country%><br><br>
+        <div class="center">
+        <%= f.submit "PayPal Express Checkout", class: "btn btn-success btn-lg btn-block" %>
+        </div>
+    </div>
 
-  <div class="col-md-4 col-md-offset-2">
-    <%= f.text_field :country%><br><br>
-      <div class="center">
-      <%= f.submit "PayPal Express Checkout", class: "btn btn-success btn-lg btn-block" %>
-      </div>
-  </div>
-
+  <% end %>
 <% end %>
 </div>

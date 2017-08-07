@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-
-
-
   root 'items#index'
   
   get '/about',   to: 'static_pages#about'
@@ -17,7 +14,7 @@ Rails.application.routes.draw do
   get '/items/new' => 'items#new', as: :user_root
 
   resources   :items do
-    resources :orders, only: [:new, :create]
+    resource :order, only: [:new, :create]
     resources :comments
     put :favorite, on: :member
   end
