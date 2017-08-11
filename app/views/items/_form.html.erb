@@ -20,11 +20,11 @@
 
 
 
-  <%= f.text_field :title %>
-  <%= f.text_area :content, label: "Description", rows: 10 %>
+  <%= f.text_field :title, placeholder: "Keep it simple..." %>
+  <%= f.text_area :content, label: "Description", rows: 10, placeholder: "Describe your item as best as you can including vehicle application, used or new condition, and where you are shipping from!" %>
   <%= f.text_field :price %>
   <%= f.text_field :shipping_price, label: "Shipping Price" %>
-  <%= f.text_field :paypal_email, value: current_user.email, label: "PayPal Address" %><br>
+  <%= f.text_field :paypal_email, value: current_user.email, label: "PayPal Address" %>Make sure your PayPal account is confirmed or buyers won't be able to check out! <br><br>
   <%= f.filepicker_field :filepicker_url, multiple: true, mimetypes: 'image/jpeg,image/gif,image/png', max_size: 5120 * 1024, button_text: "Upload Pictures", button_class: 'btn btn-info btn-lg btn-block' %><br>
 
   <div class="center">
