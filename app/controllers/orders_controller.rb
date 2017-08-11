@@ -68,7 +68,7 @@ class OrdersController < ApplicationController
       @pay_response.payKey
       redirect_to @api.payment_url(@pay_response)
     else
-      redirect_to new_item_order_path, alert: "Please fill in all shipping info!"
+      redirect_to new_item_order_path, alert: @response.error[0].message
     end
 
   end
