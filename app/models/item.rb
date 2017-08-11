@@ -12,6 +12,7 @@ class Item < ApplicationRecord
                         numericality: { greater_than_or_equal_to: 1 }
   validates :shipping_price,    :presence  => true
   validates :paypal_email,      :presence  => true
+  validates :filepicker_url,    :presence  => true
   has_many :comments, :dependent  => :destroy
   has_one :order
   has_many :favorite_items
