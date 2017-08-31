@@ -33,8 +33,8 @@ class OrdersController < ApplicationController
 
     # p = Print.find_by(id: params[:id])
     # creator = Creator.find_by(id: p.creator_id)
-    price = (@item.price + @item.shipping_price.to_i)
-    commission = 0.06
+    price = (@item.price + @item.shipping_price.to_i).round(2)
+    commission = (0.06).round(2)
 
     # Build API call
     @api = PayPal::SDK::AdaptivePayments.new
@@ -48,12 +48,12 @@ class OrdersController < ApplicationController
       :receiverList => {
         :receiver => [
           {
-            :amount => price,
+            :amount => (price).round(2),
             :email => @@order.item.paypal_email,
             :primary => true
           },
           {
-            :amount => price * commission,
+            :amount => (price * commission).round(2),
             :email => "dwolrdcojp@gmail.com",
             :primary => false
           }
