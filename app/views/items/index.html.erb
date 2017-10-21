@@ -22,7 +22,7 @@
         <% else %>
           <div class="col-md-3">
               <%= link_to(filepicker_image_tag(item.filepicker_url.split(",").last, w: 200, h: 200, fit: 'crop'), item) %><br>
-              <p class="bold"><%= truncate(item.title, length: 30) %><br></p>
+              <p class="bold"><%= truncate(item.title, length: 20) %><br></p>
               <p><%= link_to number_to_currency(item.price), item %></p>
               <p class="small"><%= time_ago_in_words(item.created_at) %> ago</p>
           </div> 
