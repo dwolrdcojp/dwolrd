@@ -1,20 +1,20 @@
 source "https://rubygems.org"
 
-gem 'rails',                   '~> 5.1', '>= 5.1.2'
+gem 'rails', '~> 6.0', '>= 6.0.3.2'          
 gem 'pg'
-gem 'devise',                  '~> 4.2'
-gem 'bcrypt',                  '3.1.11'
-gem 'faker',                   '1.6.3'
-gem 'will_paginate',           '3.1.0'
-gem 'bootstrap-will_paginate', '0.0.10'
-gem 'bootstrap-sass',          '3.3.6'
+gem 'devise'             
+gem 'bcrypt'             
+gem 'faker'           
+gem 'will_paginate'         
+gem 'bootstrap-will_paginate'
+gem 'bootstrap-sass'      
 gem 'puma'
-gem 'uglifier',                '3.0.0'
+gem 'uglifier'            
 gem 'coffee-rails'         
-gem 'turbolinks',              '5.0.0.beta2'
+gem 'turbolinks'       
 gem 'jbuilder'
-gem 'gon',                     '~> 6.0', '>= 6.0.1'
-gem 'filepicker-rails',        '~> 2.1'
+gem 'gon'                  
+gem 'filepicker-rails'     
 gem 'sass-rails'
 gem 'jquery-rails'  
 gem 'haml'
@@ -25,6 +25,7 @@ gem 'stripe'
 gem 'omniauth-stripe-connect'
 gem 'newrelic_rpm'
 gem 'sendgrid-ruby'
+gem 'webpacker'
 
 group :development, :test do
   gem 'byebug',  '9.0.0', platform: :mri
@@ -38,7 +39,7 @@ group :development do
 end
 
 group :test do
-  gem 'rails-controller-testing', '0.1.1'
+  gem 'rails-controller-testing'
   gem 'minitest-reporters',       '1.1.9'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'

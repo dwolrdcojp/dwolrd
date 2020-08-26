@@ -14,5 +14,7 @@ module Dwolrd
     config.filepicker_rails.api_key = "Ac63AD9qJToycuTyHohqhz"
 
     config.assets.initialize_on_precompile = false
+
+    config.load_defaults 6.0
   end
 end

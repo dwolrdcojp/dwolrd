@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: dwolrd_development
   pool: 5
-  username: Max
+  username: 
   password:
 
 test:
@@ -11,7 +11,7 @@ test:
   encoding: unicode
   database: dwolrd_test
   pool: 5
-  username: Max
+  username: 
   password:
 
 production:
