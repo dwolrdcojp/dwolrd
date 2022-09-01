@@ -1,3 +1,1 @@
-# D-WOLRD marketplace application
-
-This is the marketplace application for [*D-WOLRD: POWER SHOP*](http://www.d-wolrd.com/) by [DRIFT TEAM BLOODRUNNER](https://www.instagram.com/b_runner2001/).
+Online marketplace for car enthusiasts to buy & sell parts, using Ruby on Rails. Users can create a listing and host pictures with the FileStack API to advertise their offering. Payments are managed through the PayPal API. 
